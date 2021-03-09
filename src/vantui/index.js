@@ -30,6 +30,8 @@ import {
   SubmitBar,
   Stepper,
   SwipeCell,
+  Sidebar,
+  SidebarItem,
 } from "vant";
 
 Vue.use(Button);
@@ -62,3 +64,5 @@ Vue.use(Card);
 Vue.use(SubmitBar);
 Vue.use(Stepper);
 Vue.use(SwipeCell);
+Vue.use(Sidebar);
+Vue.use(SidebarItem);

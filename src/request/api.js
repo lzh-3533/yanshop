@@ -37,3 +37,10 @@ export const GetCartupdate = (params) => request.post("/cart/update", params);
 ///cart/delete
 // 购物车删除商品
 export const GetCartDelete = (params) => request.post("/cart/delete", params);
+
+///topic/list
+//专题数据
+export const GrtTopicList = (params) => request.get("/topic/list", params);
+///catalog/index
+// 分类
+export const GrtCatalogIndex = () => request.get("/catalog/index");
