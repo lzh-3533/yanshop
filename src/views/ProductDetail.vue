@@ -110,8 +110,11 @@ export default {
     }).then((res) => {
       if (res.errno == 0) {
         //console.log(res);
+        // 轮播图
         this.gallery = res.data.gallery;
+        // 产品信息
         this.info = res.data.info;
+        // 产品参数
         this.attribute = res.data.attribute;
         this.issue = res.data.issue;
         this.productList = res.data.productList;
@@ -121,7 +124,7 @@ export default {
         this.goodsId = this.$route.query.id;
       }
     });
-
+    // 相关产品
     Getgoodsrelated({
       id: this.$route.query.id,
     }).then((res) => {
@@ -144,25 +147,34 @@ export default {
     openSku() {
       this.isSkuShow = true;
     },
+    // SKU立即购买
     onBuyClicked() {
+      this.onAddCartClicked();
       this.$router.push("/cart");
     },
+    // SKU加入购物车
     onAddCartClicked() {
-      GetCartAdd({
-        goodsId: this.$route.query.id,
-        number: this.$refs.sku.getSkuData().selectedNum,
-        productId: this.productList[0].id,
-      }).then((res) => {
-        //console.log(res);
-        if (res.errno == 0) {
-          this.goodsGount = res.data.cartTotal.goodsCount;
-          this.GetcartNum();
-          this.$toast.success("添加成功");
-          setTimeout(() => {
-            this.isSkuShow = false;
-          }, 2000);
-        }
-      });
+      let token = localStorage.getItem("token");
+      if (token) {
+        GetCartAdd({
+          goodsId: this.$route.query.id,
+          number: this.$refs.sku.getSkuData().selectedNum,
+          productId: this.productList[0].id,
+        }).then((res) => {
+          //console.log(res);
+          if (res.errno == 0) {
+            this.goodsGount = res.data.cartTotal.goodsCount;
+            this.GetcartNum();
+            this.$toast.success("添加成功");
+            setTimeout(() => {
+              this.isSkuShow = false;
+            }, 2000);
+          }
+        });
+      } else {
+        this.$toast("请先登录");
+        this.$router.push("/user");
+      }
     },
   },
 };

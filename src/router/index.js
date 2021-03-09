@@ -81,7 +81,8 @@ router.beforeEach((to, from, next) => {
       Vue.prototype.$toast("请先登录");
       setTimeout(() => {
         next("/user");
-      }, 500);
+      }, 1000);
+      return;
     }
   }
   next();
